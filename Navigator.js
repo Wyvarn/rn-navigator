@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { arrayOf, object } from 'prop-types';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Animated, Dimensions } from 'react-native';
+
+const { width } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
     container: {
       flex: 1,
       flexDirection: 'row',
     },
+    scene: {
+        ...StyleSheet.absoluteFillObject,
+        flex: 1
+    }
 });
 
 const buildSceneConfig = (children = []) => {
@@ -48,16 +54,25 @@ export class Navigator extends Component {
       return null
     }
 
-    handlePop = () => {
-        this.setState(prevState =>{
-            const { stack} = prevState;
-            if (stack.length > 1){
-                return {
-                    stack: stack.slice(0, stack.length - 1)
-                }
-            }
+    _animatedValue = new Animated.Value(0);
 
-            return prevState;
+    handlePop = () => {
+        Animated.timing(this._animatedValue, {
+            toValue: width,
+            duration: 250,
+            useNativeDriver: true,
+        }).start(() => {
+            this._animatedValue.setValue(0);
+            this.setState(prevState =>{
+                const { stack} = prevState;
+                if (stack.length > 1){
+                    return {
+                        stack: stack.slice(0, stack.length - 1)
+                    }
+                }
+    
+                return prevState;
+            })    
         })
     }
 
@@ -65,18 +80,38 @@ export class Navigator extends Component {
         this.setState(prevState => ({
             ...prevState,
             stack: [...prevState.stack, prevState.sceneConfig[sceneName]]
-        }))
+        }), () => {
+            this._animatedValue.setValue(width);
+            Animated.timing(this._animatedValue, {
+                toValue: 0,
+                duration: 250,
+                useNativeDriver: true,
+            }).start()
+        })
     }
     
     render() {
         <View style={styles.container}>
             {this.state.stack.map((scene, index) => {
                 const CurrentScene = scene.component;
+                const sceneStyles = [styles.scene];
+
+                if(index === this.state.stack.length - 1 && index > 0){
+                    sceneStyles.push({
+                        transform: [
+                            {
+                                translateX: this._animatedValue
+                            }
+                        ]
+                    })
+                }
+
                 return (
-                    <CurrentScene 
-                        key={scene.index}
-                        navigator={{ push: this.handlePush, pop: this.handlePop }}
-                    />
+                    <Animated.View key={scene.key} style={sceneStyles}>
+                        <CurrentScene 
+                            navigator={{ push: this.handlePush, pop: this.handlePop }}
+                        />
+                    </Animated.View>
                 );
             })}
         </View>
