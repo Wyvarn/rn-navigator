@@ -2,6 +2,14 @@ import React from 'react';
 import { StyleSheet, View, Button } from 'react-native';
 import { Route, Navigator } from './Navigator';
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+
 const Screen1 = ({ navigator }) => (
   <View style={[styles.screen, { backgroundColor: '#59C9A5' }]}>
     <Button
@@ -37,8 +45,6 @@ const Screen3 = ({ navigator }) => (
   </View>
 );
 
-export default Screen1;
-
 export default class App extends React.Component {
   render() {
     return (
@@ -51,11 +57,3 @@ export default class App extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
