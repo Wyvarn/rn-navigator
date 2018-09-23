@@ -3,7 +3,7 @@ import { StyleSheet, View, Button } from 'react-native';
 import { Route, Navigator } from './Navigator';
 
 const styles = StyleSheet.create({
-  container: {
+  screen: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
