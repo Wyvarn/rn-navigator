@@ -1,5 +1,7 @@
 # RN-Navigator
 
+[![Build Status](https://travis-ci.org/Wyvarn/rn-navigator.svg?branch=master)](https://travis-ci.org/Wyvarn/rn-navigator)
+
 A sample [React Native](https://facebook.github.io/react-native/) navigation library. This is used to demonstrate how actual React Native Navigation libraries are built
 
 ## Getting Started
@@ -30,9 +32,15 @@ This is not necessary to have, but in the event you do want to make changes and 
 | ---------| ---------|----------|
 |![Screen1](./images/screenshots/Screen1.jpg) | ![Screen2](./images/screenshots/Screen2.jpg)| ![Screen3](./images/screenshots/Screen3.jpg)|
 
+## Deployment
+
+Deployment can be either to App Store or Google Play Store. Since this is open-ended, the decision is up to you as to where to deploy the application. This can also be deployed to Expo. Instructions for this can be found [here](https://docs.expo.io/versions/v30.0.0/distribution/).
+
+However, you can build an iOS IPK or Android APK using the `build:ios` and `build:android` scripts specified in the [package.json](./package.json) file.
+
 ## Built With
 
-1. JavaScript - Language used
+1. JavaScript - source language used
 2. [React Native](https://facebook.github.io/react-native/) - Framework for building native apps
 3. [Expo](https://expo.io) - Toolchain to help build Android and iOS apps with React
 

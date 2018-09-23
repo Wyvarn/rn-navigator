@@ -1,0 +1,22 @@
+language: node_js
+sudo: false
+
+node_js:
+  - "9"
+  - "10"
+
+matrix:
+  allow_failures:
+    - node: 9
+
+cache:
+  directories:
+    - node_modules
+
+branches:
+  only:
+    - develop
+    - master
+
+before_script:
+  - npm install
