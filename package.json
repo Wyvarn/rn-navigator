@@ -14,10 +14,10 @@
     "prepare": "yarn run snyk-protect"
   },
   "dependencies": {
+    "prop-types": "^15.7.2",
+    "react": "16.3.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz"
     "expo": "^30.0.2",
-    "prop-types": "^15.6.2",
-    "react": "16.13.1",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
     "snyk": "^1.316.1"
   },
   "snyk": true
